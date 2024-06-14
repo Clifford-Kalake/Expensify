@@ -24,7 +24,7 @@ public class ExpensifyService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    private final String baseUrl = "https://integrations.expensify.com/Integration-Server";
+    private final String baseUrl = "https://integrations.expensify.com";
 
     public void fetchAndStoreVendorData() {
         List<Vendor> vendors = fetchVendors();
@@ -42,7 +42,7 @@ public class ExpensifyService {
         headers.setBearerAuth(accessToken);
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        String url = baseUrl + "/fetchVendors"; // Replace with the actual endpoint
+        String url = baseUrl + "/fetchVendors";
 
         ResponseEntity<Vendor[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, Vendor[].class);
         return List.of(response.getBody());
@@ -56,7 +56,7 @@ public class ExpensifyService {
         headers.setBearerAuth(accessToken);
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        String url = baseUrl + "/fetchTransactions"; // Replace with the actual endpoint
+        String url = baseUrl + "/fetchTransactions";
 
         ResponseEntity<Transaction[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, Transaction[].class);
         return List.of(response.getBody());
